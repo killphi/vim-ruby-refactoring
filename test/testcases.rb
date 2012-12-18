@@ -1,15 +1,74 @@
-# rename local variable <leader>rrlv
-def method
-  asdf = 10
+# add parameter
+def add_parameter one
+  # <leader>rap[name of param] from here
+  # FIXME: make this work with g:ruby_refactoring_sans_superfluous_syntax and
+  # ditch RAddParameterNB (would cause <leader>rap to respond immediately)
 end
 
-# rename instance variable <leader>rriv
+def inline_temp
+  # start at the beginning of this line, then do <leader>rit
+  x = 10 + 2
+  puts x * x
+end
+
+# Skipping <leader>rel
+
+def convert_post_conditional
+  # Go anywhere on this next line, then do <leader>rcpc (then do it again!)
+  if cond
+    do_something
+  end
+
+  # TODO: remap this as <leader>rcc or <leader>rfi (flip-if) ?
+end
+
+# Skipping <leader>riv  (What does it do that "Ivarname =" doesn't?)
+
+def extract_local_var
+  # Start on the '3' below, then do vg_<leader>relv
+  2 + 3 / 100.0
+  # TODO: make this work without 'v'
+end
+
 class Foo
-  def method_one
+  def extract_constant
+    # Position the cursor on the '32343' below, then do vg_<leader>rec
+    p 32343
+    # TODO: make this work without 'v'
+  end
+end
+
+class Foo
+  def rename_instance_var
+    # Start on 'bar', below, and do viw<leader>rriv
     @bar = foo
   end
 
   def method_two
     @bar = bar
+  end
+end
+# But notice:
+class Buz
+  def this_bar_is_safe
+    @bar = 55
+  end
+end
+
+# rename local variable <leader>rrlv
+def rename_local_variable
+  # Start on either 'asdf', and do viw<leader>rrlv
+  asdf = 10
+  p asdf
+  # TODO: make this work without 'v'
+end
+asdf = 55 # but this one is safe
+
+class Buz
+  def extract_method
+    # Vjj to highlight a few of these, then do <leader>rem
+    do_a
+    do_b
+    do_c
   end
 end
