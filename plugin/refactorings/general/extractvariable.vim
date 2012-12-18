@@ -24,7 +24,7 @@ function! s:select_variable_contents()
   " select current word or re-establish selection
   " (not sure why we need to re-select)
   if (visualmode() == "")
-    normal! viw
+    normal! v$h
   else
     normal! gv
   endif

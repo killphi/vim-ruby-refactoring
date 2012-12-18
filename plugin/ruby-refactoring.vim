@@ -54,8 +54,9 @@ if g:ruby_refactoring_map_keys
   nnoremap <leader>rcpc :RConvertPostConditional<cr>
   nnoremap <leader>riv  :RIntroduceVariable<cr>
 
+  noremap <leader>relv :RExtractLocalVariable<cr>
+
   vnoremap <leader>rec  :RExtractConstant<cr>
-  vnoremap <leader>relv :RExtractLocalVariable<cr>
   vnoremap <leader>rrlv :RRenameLocalVariable<cr>
   vnoremap <leader>rriv :RRenameInstanceVariable<cr>
   vnoremap <leader>rem  :RExtractMethod<cr>
