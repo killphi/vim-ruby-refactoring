@@ -38,8 +38,9 @@ function! ConvertPostConditional()
     let last_line = search('^\s*end\s*$', 'nW')
     let is_three_lines = (last_line - first_line) == 2
     if is_three_lines
-      " delete third line, cut first, paste after second, join, indent properly
-      normal jjddkddpkJ==
+      " black-hole delete third line, cut first,
+      " paste after second, join, indent properly
+      normal jj"_ddkkddpkJ==
     else
       "echo "multi-line conditional contains 2+ statements, aborting"
     endif
