@@ -40,11 +40,11 @@ Feature: Extract Method :RExtractMethod
         two = 2
         three = 3
         four = two + two
-        five = add(two, three)
+        five = add two, three
         six = five + one
       end
 
-      def add(two, three)
+      def add two, three
         two + three
       end
     end
@@ -152,10 +152,10 @@ Feature: Extract Method :RExtractMethod
     def originalMethod
       x = 1
       y = 2
-      z = add(x, y)
+      z = add x, y
     end
 
-    def add(x, y)
+    def add x, y
       x + y
     end
 
@@ -178,10 +178,10 @@ Feature: Extract Method :RExtractMethod
     Then I should see:
     """
     def originalMethod(b, a)
-      c = add(b, a)
+      c = add b, a
     end
 
-    def add(b, a)
+    def add b, a
       a + b
     end
 
