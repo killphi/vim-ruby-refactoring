@@ -5,6 +5,32 @@ Feature: Extract Method :RExtractMethod
       :RExtractMethod
       <leader>rem
 
+  @issue
+  Scenario: Asdfdfd
+    Given I have the following code:
+    """
+    def originalMethod(b, a)
+      c = a + Foo
+    end
+
+    """
+    When I select "a + Foo" and execute:
+    """
+    :RExtractMethod
+    """
+    And I fill in the parameter "add"
+    Then I should see:
+    """
+    def originalMethod(b, a)
+      c = add a
+    end
+
+    def add a
+      a + Foo
+    end
+
+    """
+
   Scenario: Extract one line assignment into a new method
     Given I have the following code:
     """

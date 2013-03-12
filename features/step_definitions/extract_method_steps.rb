@@ -30,7 +30,7 @@ When /^I select \"x \+ y\" and execute:$/ do |command|
   add_to_commands command
 end
 
-When /^I select \"a \+ b\" and execute:$/ do |command|
+When /^I select \"a \+ \S+\" and execute:$/ do |command|
   @commands = ":normal 2Gfav$" 
   add_return_key
   add_to_commands command

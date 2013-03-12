@@ -221,7 +221,9 @@ function! s:ruby_identify_variables( tuples )
       let assigned = deepcopy(referenced)
       let referenced = []
     elseif tuple[0] == "VAR" && !s:is_target_of_rspec_let(tuple[1])
-      call add(referenced,tuple[1])
+      if tuple[1] !~ '[A-Z]\C'
+        call add(referenced,tuple[1])
+      end
     endif
   endfor
 
