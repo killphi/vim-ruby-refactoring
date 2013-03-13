@@ -1,22 +1,5 @@
-require 'cucumber/rake/task'
+task :default => :test
 
-Cucumber::Rake::Task.new(:cucumber)
-namespace :cucumber do
-
-  Cucumber::Rake::Task.new(:wip) do |cukes|
-    cukes.cucumber_opts = "-p wip"
-  end
-
-  Cucumber::Rake::Task.new(:issues) do |issue|
-    issue.cucumber_opts = "-p issues"
-  end
-end
-
-task :default => :cucumber
-
-namespace :relish do
-  task :push do
-    `bundle exec relish push vim-ruby-refactoring`
-  end
-end
+desc 'run the refactorings in vim; then hope what happens is about right'
+task :test do sh 'test/run' end
 
