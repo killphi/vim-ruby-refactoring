@@ -6,7 +6,7 @@ end
 Then /^I see no errors$/ do
   @commands << ':normal G"zp'
   add_return_key
-  result_of_executing_the_commands.should_not include("Error")
+  expect(result_of_executing_the_commands).not_to include("Error")
 end
 
 When /^I select the let and execute:$/ do |command|

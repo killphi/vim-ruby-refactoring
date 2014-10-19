@@ -1,9 +1,0 @@
-#!/bin/sh -xe
-input=test/testcases.rb
-proof=test/proof.rb
-cp $input $proof
-vim -f +'so plugin/ruby-refactoring.vim' $proof \
-    +'/do_b x/' \
-    +'call feedkeys("V:RExtractMethod\<cr>do_b_with\<cr>:x\<cr>")'
-
-git diff $proof && printf "\e[38;5;82mPassed, br0\e[0m.\n"

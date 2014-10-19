@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/killphi/robot-vim.git
+  revision: a30a832926b93108b1008de515a8ead1ab910179
+  branch: fix_weird_behavior
+  specs:
+    robot-vim (2.0.1)
+      uuid (~> 2.3.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -27,8 +35,6 @@ GEM
     rest-client (1.7.2)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
-    robot-vim (1.1.0)
-      uuid (~> 2.3.1)
     rspec (3.1.0)
       rspec-core (~> 3.1.0)
       rspec-expectations (~> 3.1.0)
@@ -52,5 +58,5 @@ DEPENDENCIES
   cucumber
   rake
   relish
-  robot-vim (= 1.1.0)
+  robot-vim!
   rspec
