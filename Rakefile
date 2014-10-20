@@ -7,5 +7,5 @@ end
 
 desc 'format cucumber run as HTML'
 task :html_features do
-  sh 'cucumber -f html -o cucumber.html'
+  sh 'cucumber -f html -o test/report.html'
 end

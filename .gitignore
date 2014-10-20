@@ -1,4 +1,4 @@
 *.un~
 *.swp
 doc/tags
-cucumber.html
+test/*
