@@ -3,7 +3,7 @@
 "   module or class
 function! ExtractConstant()
   try
-    let name = toupper(common#get_input("Constant name: ", "No constant name given!"))
+    let name = toupper(ruby_refactoring#get_input("Constant name: ", "No constant name given!"))
   catch
     echo v:exception
     return

@@ -3,7 +3,7 @@
 "   brackets
 function! AddParameterNB()
   try
-    let name = common#get_input("Parameter name: ", "No parameter name given!")
+    let name = ruby_refactoring#get_input("Parameter name: ", "No parameter name given!")
   catch
     echo v:exception
     return

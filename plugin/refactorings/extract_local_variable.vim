@@ -2,12 +2,12 @@
 "   Extracts the selected scope to a variable
 function! ExtractLocalVariable()
   try
-    let name = common#get_input("Variable name: ", "No variable name given!")
+    let name = ruby_refactoring#get_input("Variable name: ", "No variable name given!")
   catch
     echo v:exception
     return
   endtry
-  
+
   call s:select_variable_contents()
 
   " Replace selected text with the variable name
