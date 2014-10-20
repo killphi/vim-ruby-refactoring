@@ -9,6 +9,11 @@ group :test do
   gem 'robot-vim'
 end
 
+group :dev do
+  gem 'guard-cucumber'
+  gem 'guard-livereload'
+end
+
 group :doc do
   gem 'relish'
 end

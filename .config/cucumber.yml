@@ -1,0 +1,2 @@
+html: --format html --out=test/report.html
+default: --format progress
