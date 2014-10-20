@@ -14,6 +14,7 @@ def select_method
 end
 
 def add_to_commands command
+  @commands = "" if @commands.nil?
   @commands << command
   add_return_key
 end
@@ -31,6 +32,5 @@ def add_return_key
 end
 
 def go_to line
-  @commands = ":normal #{line}G"
-  add_return_key
+  add_to_commands ":normal #{line}G"
 end

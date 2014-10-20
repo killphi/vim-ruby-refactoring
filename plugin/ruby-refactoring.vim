@@ -12,6 +12,12 @@
 " Some support functions borrowed from Luc Hermitte's lh-vim library
 " Also borrowed snake case function from tim popes vim-abloish plugin
 
+
+" set up config variables
+if !exists('g:ruby_refactoring_brackets_have_space')
+  let g:ruby_refactoring_brackets_have_space = 0
+endif
+
 " This is a dependency for a few of the refactorings, and it's useful in
 " general, so just force load it, here:
 runtime matchit.vim
