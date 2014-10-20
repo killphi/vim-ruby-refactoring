@@ -8,16 +8,6 @@ function! AddParameter()
     return
   endtry
 
-  " brackets
-  if g:ruby_refactoring_brackets_have_space == 1
-    let bracket_open  = "( "
-    let bracket_close = " )"
-  else
-    let bracket_open  = "("
-    let bracket_close = ")"
-  endif
-
-
   " Save current position
   let cursor_position = getpos(".")
 
@@ -29,6 +19,15 @@ function! AddParameter()
 
   " remove trailing whitespace
   s/\v\s$//e
+
+  " brackets
+  if g:ruby_refactoring_brackets_have_space == 1
+    let bracket_open  = "( "
+    let bracket_close = " )"
+  else
+    let bracket_open  = "("
+    let bracket_close = ")"
+  endif
 
   " test the line
   let line = getline(".")
