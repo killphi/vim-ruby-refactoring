@@ -5,6 +5,7 @@ function! InlineTemp()
   " XXX: How do I copy into a variable so I don't pollute the registers?
   let original_a = @a
   normal "ayiw
+  let @a = "#{" . @a . "}\\|\\<" . @a . "\\>"
 
   " It takes 4 diws to get the variable, equal sign, and surrounding
   " whitespace. I'm not sure why. diw is different from dw in this
@@ -25,7 +26,7 @@ function! InlineTemp()
   let [block_start, block_end] = ruby_refactoring#get_range_for_block('\<def\|it\>','Wb')
 
   " Rename the variable within the range of the block
-  call ruby_refactoring#gsub_all_in_range(current_line, block_end, '\<' . @a . '\>', @b)
+  call ruby_refactoring#gsub_all_in_range(current_line, block_end, @a, @b)
 
   " Put back original register contents
   let @a = original_a
