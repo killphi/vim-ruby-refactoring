@@ -20,14 +20,17 @@ function! AddParameter()
 
   let closing_bracket_index = stridx(getline("."), ")")
   let opening_bracket_index = stridx(getline("."), "(")
+  let has_parameter_without_brackets = match(getline("."), "\\vdef \\S+ \\S+")
 
-  if closing_bracket_index == -1
+  if has_parameter_without_brackets != -1
+    execute "normal A, " . name . "\<Esc>"
+  elseif closing_bracket_index == -1
     execute "normal A(" . name . ")\<Esc>"
     " there is an open & close paren but no parameters
   elseif opening_bracket_index != -1 && opening_bracket_index == closing_bracket_index - 1
-    exec ':s/)/' . name . ')/'
+    exec ":s/)/" . name . ")/"
   else
-    exec ':.s/)/, ' . name . ')/'
+    exec ":.s/)/, " . name . ")/"
   endif
 
   " Restore caret position
