@@ -2,14 +2,16 @@
 "   Extracts the selected scope into a method above the scope of the
 "   current method
 function! ExtractMethod() range
+  echo "not implemented"
+  return
   try
-    let name = common#get_input("Method name: ", "No method name given!")
+    let name = ruby_refactoring#get_input("Method name: ", "No method name given!")
   catch
     echo v:exception
     return
   endtry
-  
-  let [block_start, block_end] = common#get_range_for_block('\<def\|it\>','Wb')
+
+  let [block_start, block_end] = ruby_refactoring#get_range_for_block('\<def\|it\>','Wb')
 
   let pre_selection = join( getline(block_start+1,a:firstline-1), "\n" )
   let pre_selection_variables = s:ruby_determine_variables(pre_selection)
@@ -17,7 +19,7 @@ function! ExtractMethod() range
   let post_selection = join( getline(a:lastline+1,block_end), "\n" )
   let post_selection_variables = s:ruby_determine_variables(post_selection)
 
-  let selection = common#cut_visual_selection()
+  let selection = ruby_refactoring#cut_visual_selection()
   let selection_variables = s:ruby_determine_variables(selection)
 
   let parameters = []
@@ -58,7 +60,7 @@ function! s:build_parameter_declaration_position_pairs(parameters)
     else
       call insert(pairs, [parm, getpos("$")]) " use end of file to sink to bottom
     endif
-    call setpos(".",cursor_position) 
+    call setpos(".",cursor_position)
   endfor
 
   return pairs
@@ -82,22 +84,22 @@ function! s:parameter_names_of(pairs)
   return sorted_parameters
 endfunction
 
-function! s:ruby_determine_variables(block) 
+function! s:ruby_determine_variables(block)
   let tokens = s:ruby_tokenize(a:block)
   let statements = s:ruby_identify_tokens(tokens)
 
   let assigned = []
   let referenced = []
 
-  for statement in statements 
+  for statement in statements
     call s:ruby_identify_methods( statement )
     let results = s:ruby_identify_variables( statement )
     call extend(assigned,results[0])
     call extend(referenced,results[1])
   endfor
 
-  call common#dedupe_list(assigned)
-  call common#dedupe_list(referenced)
+  call ruby_refactoring#dedupe_list(assigned)
+  call ruby_refactoring#dedupe_list(referenced)
 
   return [assigned,referenced]
 endfunction
@@ -126,7 +128,7 @@ endfunction
 " Determines what each of a list of strings is with respect to the ruby
 " language.  E.g. keywords, operators, variables, methods
 "
-" TODO: Improve this with ref to http://www.zenspider.com/Languages/Ruby/QuickRef.html#4 
+" TODO: Improve this with ref to http://www.zenspider.com/Languages/Ruby/QuickRef.html#4
 function! s:ruby_identify_tokens( tokenlist )
   let symbols = []
   let statements = []
@@ -149,23 +151,23 @@ function! s:ruby_identify_tokens( tokenlist )
       let sym = "CONST"
     elseif token[0] == "'" || token[0] == '"'
       let sym = "STR"
-    elseif token == '#' 
+    elseif token == '#'
       let ignore_to_eos = 1
-    elseif token == '=' 
+    elseif token == '='
       let sym = 'ASSIGN'
-    elseif token == ',' 
+    elseif token == ','
       let sym = 'COMMA'
-    elseif token == '"' 
+    elseif token == '"'
       let sym = 'DQUOTE'
-    elseif token == "'" 
+    elseif token == "'"
       let sym = 'SQUOTE'
-    elseif token == '(' 
+    elseif token == '('
       let sym = 'LPAREN'
-    elseif token == ')' 
+    elseif token == ')'
       let sym = 'RPAREN'
-    elseif token == ';' 
+    elseif token == ';'
       let sym = "EOS"
-      if len(symbols) > 0 
+      if len(symbols) > 0
         call add(statements, symbols)
         let symbols = []
         let ignore_to_eos = 0
@@ -179,7 +181,7 @@ function! s:ruby_identify_tokens( tokenlist )
       let sym = "COMMENT"
     endif
 
-    if sym != "WS" 
+    if sym != "WS"
       call add(symbols,[sym,token])
     endif
   endfor
@@ -197,7 +199,7 @@ endfunction
 " preceded by 'def'
 function! s:ruby_identify_methods( tuples )
   let lasttuple = []
-  for tuple in a:tuples 
+  for tuple in a:tuples
     let lastsym = get(lasttuple,0,"")
     let sym = tuple[0]
     if ((sym == "LPAREN") && (lastsym == "VAR")) || ((sym == "VAR") && (lastsym == "VAR")) || ((sym == "STR" && lastsym == "VAR"))
@@ -252,23 +254,23 @@ function! s:em_insert_new_method(name, selection, parameters, retvals, block_end
   endif
 
   let method_retvals = ""
-  if len(a:retvals) > 0 
+  if len(a:retvals) > 0
     let method_retvals = join(a:retvals,", ")
   endif
 
   let method_lines = split( "\ndef " . a:name . method_params . "\n" . a:selection . (has_trailing_newline ? "" : "\n") . (len(a:retvals) > 0 ? "return " . method_retvals . "\n" : "") . "end", "\n", 1)
 
-  let start_line_number = a:block_end - len(split(a:selection, "\n", 1)) + 1 
+  let start_line_number = a:block_end - len(split(a:selection, "\n", 1)) + 1
 
   " Insert new method
-  call append(start_line_number, method_lines) 
+  call append(start_line_number, method_lines)
 
   " Insert call to new method, and fix up the source so it makes sense
   if has_trailing_newline
     exec "normal i" . (len(a:retvals) > 0 ? method_retvals . " = " : "") . a:name . method_params . "\n"
     normal k
   else
-    exec "normal i" . a:name 
+    exec "normal i" . a:name
   end
 
   " Reset cursor position
@@ -276,15 +278,15 @@ function! s:em_insert_new_method(name, selection, parameters, retvals, block_end
 
   " Fix indent on call to method in case we corrupted it
   normal V=
-  
+
   " Indent new codeblock
   exec "normal " . (start_line_number+1) . "GV" . len(method_lines) . "j="
 
-  " Jump back again, 
+  " Jump back again,
   call setpos(".", cursor_position)
 
   " Visual mode normally moves the caret, go back
-  if has_trailing_newline 
+  if has_trailing_newline
     normal $
   endif
 endfunction

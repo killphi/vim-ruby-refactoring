@@ -1,10 +1,19 @@
 source 'https://rubygems.org/'
 
-group :development do
-  gem 'cucumber'
+group :test do
   gem 'rake'
-  gem 'relish'
-  gem 'robot-vim'
+
+  gem 'cucumber'
   gem 'rspec'
+
+  gem 'robot-vim'
 end
 
+group :dev do
+  gem 'guard-cucumber'
+  gem 'guard-livereload'
+end
+
+group :doc do
+  gem 'relish'
+end

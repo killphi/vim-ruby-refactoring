@@ -1,5 +1,7 @@
 # Ruby Refactoring Tool for Vim
 
+[![Build Status](https://travis-ci.org/killphi/vim-ruby-refactoring.svg?branch=changes)
+](https://travis-ci.org/killphi/vim-ruby-refactoring)  
 Currently in 100% VimL, but might move toward a Ruby implementation sometime.
 
 N.B. 'Rename Local Variable', 'Rename Instance Variable' and 'ExtractMethod'
@@ -16,7 +18,7 @@ problems, but if it does, let us know.
     :RExtractLocalVariable   - Extract Local Variable    (visual selection)
     :RRenameLocalVariable    - Rename Local Variable     (visual selection/variable under the cursor, *REQUIRES matchit.vim*)
     :RRenameInstanceVariable - Rename Instance Variable  (visual selection, *REQUIRES matchit.vim*)
-    :RExtractMethod          - Extract Method            (visual selection, *REQUIRES matchit.vim*)
+    :RExtractMethod          - Extract Method            (visual selection, *REQUIRES matchit.vim*, doesn't work currently)
 
 ## Default bindings:
 

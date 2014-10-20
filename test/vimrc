@@ -1,0 +1,9 @@
+set rtp+=.
+set rtp+=test/matchit
+set rtp+=test/vim-ruby
+runtime! ruby-refactoring.vim
+
+set expandtab
+set sw=2
+set sts=2
+filetype plugin indent on

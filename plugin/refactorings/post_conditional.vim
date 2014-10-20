@@ -1,4 +1,4 @@
-" Synopsis: 
+" Synopsis:
 "   converts a post-conditional expression to a conditional expression
 "   note: will convert both types of conditional expression
 function! ConvertPostConditional()
@@ -38,9 +38,12 @@ function! ConvertPostConditional()
     let last_line = search('^\s*end\s*$', 'nW')
     let is_three_lines = (last_line - first_line) == 2
     if is_three_lines
-      " black-hole delete third line, cut first,
-      " paste after second, join, indent properly
-      normal jj"_ddkkddpkJ==
+      " black-hole delete third line
+      exe 'normal ' . last_line . 'G"_dd'
+      " cut first line; auto-jumps to second
+      exe 'normal ' . first_line . 'Gdd'
+      " paste, join, indent properly
+      normal pkJ==
     else
       "echo "multi-line conditional contains 2+ statements, aborting"
     endif
@@ -66,6 +69,6 @@ function! ConvertPostConditional()
     " indent the conditional body
     normal >>
     " remove trailing whitespace from paste operation
-	  s/\s*$//g
+    s/\s*$//g
   endif
 endfunction

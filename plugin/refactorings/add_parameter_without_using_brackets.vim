@@ -1,10 +1,9 @@
-
 " Synopsis:
 "   Adds a parameter (or many separated with commas) to a method with no
 "   brackets
 function! AddParameterNB()
   try
-    let name = common#get_input("Parameter name: ", "No parameter name given!")
+    let name = ruby_refactoring#get_input("Parameter name: ", "No parameter name given!")
   catch
     echo v:exception
     return
@@ -19,7 +18,22 @@ function! AddParameterNB()
     exec "?\\<def\\>"
   endif
 
-  execute "normal A " . name . "\<Esc>"
+  " remove trailing whitespace
+  s/\v\s$//e
+
+  " remove brackets
+  s/\v\s*\( ?/ /e
+  s/\v\s*\)//e
+
+  " test the line
+  let has_parameter = match(getline("."), "\\vdef \\S+\\s+\\S+")
+
+
+  if has_parameter != -1
+    exec "normal A, " . name . "\<Esc>"
+  else
+    exec "normal A " . name . "\<Esc>"
+  endif
 
   " Restore caret position
   call setpos(".", cursor_position)

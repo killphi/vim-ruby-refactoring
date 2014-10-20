@@ -1,11 +1,11 @@
 # This file will allow us to edit the vim runner
 # configuration without having to edit every feature file
-def result_of_executing_the_commands
-  RobotVim::Runner.new.run(:input_file => @input, :commands => commands)
-end
+RETURN_KEY = "\n"
 
-def return_key
-  ''
+def result_of_executing_the_commands
+  vimrc = { vimrc: File.expand_path("test/vimrc") }
+  runner_args = { input_file: @input, commands: commands }
+  RobotVim::Runner.new(vimrc).run(runner_args).body
 end
 
 def select_method
@@ -14,12 +14,13 @@ def select_method
 end
 
 def add_to_commands command
+  @commands = "" if @commands.nil?
   @commands << command
   add_return_key
 end
 
 def set_filetype
- ":set ft=ruby" + return_key
+ ":set ft=ruby" + RETURN_KEY
 end
 
 def commands
@@ -27,10 +28,9 @@ def commands
 end
 
 def add_return_key
-  @commands << return_key
+  @commands << RETURN_KEY
 end
 
 def go_to line
-  @commands = ":normal #{line}G"
-  add_return_key
+  add_to_commands ":normal #{line}G"
 end

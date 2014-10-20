@@ -3,7 +3,7 @@
 "   module or class
 function! ExtractConstant()
   try
-    let name = toupper(common#get_input("Constant name: ", "No constant name given!"))
+    let name = toupper(ruby_refactoring#get_input("Constant name: ", "No constant name given!"))
   catch
     echo v:exception
     return
@@ -16,6 +16,5 @@ function! ExtractConstant()
   " Find the enclosing class or module
   exec "?^\\<class\\|module\\>"
   " Define the constant inside the class or module
-  exec "normal! o" . name . " = " 
-  normal! $p
+  exec "normal! o" . name . " = \<Esc>p=="
 endfunction

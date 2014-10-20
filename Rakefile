@@ -1,5 +1,11 @@
-task :default => :test
+task :default => :features
 
-desc 'run the refactorings in vim; then hope what happens is about right'
-task :test do sh 'test/run' end
+desc 'run cucumber features'
+task :features do
+  sh 'cucumber'
+end
 
+desc 'format cucumber run as HTML'
+task :html_features do
+  sh 'cucumber --profile html'
+end

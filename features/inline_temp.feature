@@ -109,7 +109,6 @@ Feature: Inline Temp :RInlineTemp
 
     """
 
-  @issues
   Scenario: Inline a temporary variable to a value within a string
     Given I have the following code:
     """
@@ -125,7 +124,6 @@ Feature: Inline Temp :RInlineTemp
     word  = "2006-01-01"
     """
 
-  @issue
   Scenario: Inline temp in an rspec it when an arbitrary helper method exists
     Given I have the following code:
     """
