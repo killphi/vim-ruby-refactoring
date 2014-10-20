@@ -5,31 +5,6 @@ Feature: Extract Method :RExtractMethod
       :RExtractMethod
       <leader>rem
 
-  Scenario: Asdfdfd
-    Given I have the following code:
-    """
-    def originalMethod(b, a)
-      c = a + Foo
-    end
-
-    """
-    When I select "a + Foo" and execute:
-    """
-    :RExtractMethod
-    """
-    And I fill in the parameter "add"
-    Then I should see:
-    """
-    def originalMethod(b, a)
-      c = add a
-    end
-
-    def add a
-      a + Foo
-    end
-
-    """
-
   Scenario: Extract one line assignment into a new method
     Given I have the following code:
     """
@@ -65,11 +40,11 @@ Feature: Extract Method :RExtractMethod
         two = 2
         three = 3
         four = two + two
-        five = add two, three
+        five = add(two, three)
         six = five + one
       end
 
-      def add two, three
+      def add(two, three)
         two + three
       end
     end
@@ -80,7 +55,7 @@ Feature: Extract Method :RExtractMethod
     Given I have the following code:
     """
     def return_key
-      ''
+      "\n"
     end
 
     def select_method
@@ -97,7 +72,7 @@ Feature: Extract Method :RExtractMethod
     Then I should see:
     """
     def return_key
-      ''
+      "\n"
     end
 
     def select_method
@@ -123,7 +98,7 @@ Feature: Extract Method :RExtractMethod
         20.times do
           bowling.roll 0
         end
-        bowling.score.should == 0
+        expect(bowling.score).to eq(0)
       end
     end
 
@@ -142,7 +117,7 @@ Feature: Extract Method :RExtractMethod
 
       it "should return 0 when rolling all gutter balls" do
         roll_many
-        bowling.score.should == 0
+        expect(bowling.score).to eq(0)
       end
 
       def roll_many
@@ -174,10 +149,10 @@ Feature: Extract Method :RExtractMethod
     def originalMethod
       x = 1
       y = 2
-      z = add x, y
+      z = add(x, y)
     end
 
-    def add x, y
+    def add(x, y)
       x + y
     end
 
@@ -199,10 +174,10 @@ Feature: Extract Method :RExtractMethod
     Then I should see:
     """
     def originalMethod(b, a)
-      c = add b, a
+      c = add(b, a)
     end
 
-    def add b, a
+    def add(b, a)
       a + b
     end
 
