@@ -1,3 +1,5 @@
 rvm:
  - 2.0.0
  - 2.1.3
+bundler_args: --without doc dev --deployment --jobs=3 --retry=3
+cache: bundler

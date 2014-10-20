@@ -1,10 +1,14 @@
 source 'https://rubygems.org/'
 
-group :development do
-  gem 'cucumber'
+group :test do
   gem 'rake'
-  gem 'relish'
+
+  gem 'cucumber'
   gem 'rspec'
 
-  gem 'robot-vim', git: 'https://github.com/killphi/robot-vim.git', branch: 'fix_weird_behavior'
+  gem 'robot-vim'
+end
+
+group :doc do
+  gem 'relish'
 end
