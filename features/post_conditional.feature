@@ -5,7 +5,6 @@ Feature: Convert Post Conditional :RConvertPostConditional
       :RConvertPostConditional
       <leader>rcpc
 
-  @issue
   Scenario: Convert a simple if post-conditional expression
     Given I have the following code:
     """

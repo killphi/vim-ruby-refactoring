@@ -30,7 +30,6 @@ Feature: Extract Local Variable :RExtractLocalVariable
 
     """
 
-  @issue
   Scenario: Extract a line, if no selection
     Given I have the following code:
     """

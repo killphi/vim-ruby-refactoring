@@ -23,7 +23,6 @@ Feature: Add Parameter No Brackets :RAddParameterNB
 
     """
 
-  @issues
   Scenario: Add a parameter to a method with an existing parameter
     Given I have the following code:
     """

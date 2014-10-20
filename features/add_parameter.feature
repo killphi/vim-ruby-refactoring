@@ -59,7 +59,6 @@ Feature: Add Parameter :RAddParameter
 
     """
 
-  @issues
   Scenario: Add a parameter to a method with an existing parameter but not brackets
     Given I have the following code:
     """

@@ -5,7 +5,6 @@ Feature: Extract Method :RExtractMethod
       :RExtractMethod
       <leader>rem
 
-  @issue
   Scenario: Asdfdfd
     Given I have the following code:
     """
@@ -77,7 +76,6 @@ Feature: Extract Method :RExtractMethod
 
     """
 
-  @issues
   Scenario: Extract selected line to method with no parameter
     Given I have the following code:
     """
@@ -113,7 +111,6 @@ Feature: Extract Method :RExtractMethod
 
     """
 
-  @issue
   Scenario: Extract in an rspec file does not add lets as parameters
     Given I have the following code:
     """
@@ -157,7 +154,6 @@ Feature: Extract Method :RExtractMethod
 
     """
 
-  @issue
   Scenario: Parameters to extracted method should be in the order they are declared in original method when declared on separate lines.
     Given I have the following code:
     """
@@ -187,7 +183,6 @@ Feature: Extract Method :RExtractMethod
 
     """
 
-  @issue
   Scenario: Parameters to extracted method should be in the order they are declared in original method when declared on same lines.
     Given I have the following code:
     """
