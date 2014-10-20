@@ -118,10 +118,10 @@ Feature: Extract Method :RExtractMethod
     Given I have the following code:
     """
     require 'bowling'
-    
+
     describe Bowling,"score" do
       let(:bowling) { Bowling.new }
-    
+
       it "should return 0 when rolling all gutter balls" do
         20.times do
           bowling.roll 0
@@ -130,7 +130,7 @@ Feature: Extract Method :RExtractMethod
       end
     end
 
-    """    
+    """
     When I select the "20.times do" block and execute:
     """
     :RExtractMethod
@@ -139,7 +139,7 @@ Feature: Extract Method :RExtractMethod
     Then I should see:
     """
     require 'bowling'
-    
+
     describe Bowling,"score" do
       let(:bowling) { Bowling.new }
 
@@ -147,7 +147,7 @@ Feature: Extract Method :RExtractMethod
         roll_many
         bowling.score.should == 0
       end
-    
+
       def roll_many
         20.times do
           bowling.roll 0
@@ -167,7 +167,7 @@ Feature: Extract Method :RExtractMethod
       z = x + y
     end
 
-    """    
+    """
     When I select "x + y" and execute:
     """
     :RExtractMethod
@@ -195,7 +195,7 @@ Feature: Extract Method :RExtractMethod
       c = a + b
     end
 
-    """    
+    """
     When I select "a + b" and execute:
     """
     :RExtractMethod

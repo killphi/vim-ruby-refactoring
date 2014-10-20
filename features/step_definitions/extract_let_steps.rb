@@ -22,5 +22,6 @@ end
 def select_rspec_let
   @commands = "redir @z>>"
   @commands << ":normal 2G"
+  add_return_key
 end
 

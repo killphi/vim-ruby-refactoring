@@ -25,13 +25,13 @@ When /^I select the \"20\.times do\" block and execute:$/ do |command|
 end
 
 When /^I select \"x \+ y\" and execute:$/ do |command|
-  @commands = ":normal 4Gfxv$" 
+  @commands = ":normal 4Gfxv$"
   add_return_key
   add_to_commands command
 end
 
 When /^I select \"a \+ \S+\" and execute:$/ do |command|
-  @commands = ":normal 2Gfav$" 
+  @commands = ":normal 2Gfav$"
   add_return_key
   add_to_commands command
 end

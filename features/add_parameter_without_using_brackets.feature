@@ -1,5 +1,5 @@
 Feature: Add Parameter No Brackets :RAddParameterNB
-  This refactoring should add a new parameter to a method definition, regardless of how many the method already has.  
+  This refactoring should add a new parameter to a method definition, regardless of how many the method already has.
 
     Shortcuts:
       :RAddParameterNB
@@ -27,7 +27,7 @@ Feature: Add Parameter No Brackets :RAddParameterNB
   Scenario: Add a parameter to a method with an existing parameter
     Given I have the following code:
     """
-    def set_details name 
+    def set_details name
     end
     """
     When I select the method and execute:
