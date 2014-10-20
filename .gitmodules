@@ -1,3 +1,0 @@
-[submodule "features/support/matchit"]
-	path = features/support/matchit
-	url = https://github.com/vim-scripts/matchit.zip

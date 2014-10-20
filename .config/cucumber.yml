@@ -1,4 +1,4 @@
 ---
 <% common = "--strict --format progress" %>
-html: <%= common %> --format html --out=test/cucumber_report.html
+html: <%= common %> --format html --out=test/reports/cucumber.html
 default: <%= common %>
