@@ -1,2 +1,3 @@
 set rtp+=.
+set rtp+=features/support/matchit
 runtime! ruby-refactoring.vim
