@@ -13,5 +13,5 @@ guard 'cucumber', cli: '--profile html', notification: false do
 end
 
 guard 'livereload' do
-  watch(%r{test/.+\.(css|js|html)})
+  watch(%r{test/reports/.+\.(css|js|html)})
 end
