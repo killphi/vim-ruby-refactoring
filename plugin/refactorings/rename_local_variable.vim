@@ -10,6 +10,7 @@ function! RenameLocalVariable()
     endif
 
     let name = ruby_refactoring#get_input("Rename to: ", "No variable name given!" )
+    let name = tolower(substitute(name, ' ', '_', 'g'))
   catch
     echo v:exception
     return

@@ -15,11 +15,9 @@ Feature: Extract RSpec Let :RExtractLet
       end
     end
     """
-    When I select the variable assignment and execute:
-    """
-    :RExtractLet
-    """
-    Then I should see:
+    When I go to expression `bar = 10`
+    And I execute :RExtractLet
+    Then I see:
     """
     describe "something" do
       let(:bar) { 10 }
@@ -27,7 +25,6 @@ Feature: Extract RSpec Let :RExtractLet
         bar.should == 10
       end
     end
-
     """
 
   Scenario: Nothing to extract
@@ -39,8 +36,7 @@ Feature: Extract RSpec Let :RExtractLet
         bar.should == 10
       end
     """
-    When I select the let and execute:
-    """
-    :RextractLet
-    """
-    Then I see no errors
+    When I redirect output to register error
+    And I go to expression `let`
+    And I execute :RExtractLet
+    Then I see no errors in register error

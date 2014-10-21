@@ -12,15 +12,12 @@ Feature: Rename Local Variable :RRenameLocalVariable
       foo = 7
     end
     """
-    When I select the local variable assignment and execute:
-    """
-    :RRenameLocalVariable
-    """
-    And I fill in the parameter "days_in_week"
-    Then I should see:
+    When I select expression `foo`
+    And I execute :RRenameLocalVariable
+    And I fill in `days in week`
+    Then I see:
     """
     def method
       days_in_week = 7
     end
-
     """

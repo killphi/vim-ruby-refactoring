@@ -12,15 +12,20 @@
 " Some support functions borrowed from Luc Hermitte's lh-vim library
 " Also borrowed snake case function from tim popes vim-abloish plugin
 
+if exists('g:loaded_ruby_refactoring')
+  finish
+end
+
 
 " set up config variables
-if !exists('g:ruby_refactoring_brackets_have_space')
-  let g:ruby_refactoring_brackets_have_space = 0
+if !exists('g:ruby_refactoring_parentheses_style')
+  let g:ruby_refactoring_parentheses_style = 1
 endif
 
 " This is a dependency for a few of the refactorings, and it's useful in
 " general, so just force load it, here:
 runtime matchit.vim
+runtime plugin/matchit.vim
 
 " Load all refactoring recipes
 exec 'runtime ' . expand('<sfile>:p:h') . '/refactorings/*.vim'
@@ -31,7 +36,6 @@ exec 'runtime ' . expand('<sfile>:p:h') . '/refactorings/*.vim'
 " TODO: Do we even need this prefix? How likely is it that we'll conflict?
 
 command! RAddParameter                  call AddParameter()
-command! RAddParameterNB                call AddParameterNB()
 command! RInlineTemp                    call InlineTemp()
 command! RExtractLet                    call ExtractIntoRspecLet()
 command! RConvertPostConditional        call ConvertPostConditional()
@@ -54,16 +58,16 @@ endif
 
 if g:ruby_refactoring_map_keys
   nnoremap <leader>rap  :RAddParameter<cr>
-  nnoremap <leader>rapn :RAddParameterNB<cr>
   nnoremap <leader>rit  :RInlineTemp<cr>
   nnoremap <leader>rel  :RExtractLet<cr>
   nnoremap <leader>rcpc :RConvertPostConditional<cr>
   nnoremap <leader>riv  :RIntroduceVariable<cr>
 
-  noremap <leader>relv :RExtractLocalVariable<cr>
-
+  vnoremap <leader>relv :RExtractLocalVariable<cr>
   vnoremap <leader>rec  :RExtractConstant<cr>
   vnoremap <leader>rrlv :RRenameLocalVariable<cr>
   vnoremap <leader>rriv :RRenameInstanceVariable<cr>
   vnoremap <leader>rem  :RExtractMethod<cr>
 endif
+
+let g:loaded_ruby_refactoring = 1

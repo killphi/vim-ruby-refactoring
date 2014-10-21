@@ -3,7 +3,7 @@
 "   note: will convert both types of conditional expression
 function! ConvertPostConditional()
   " pattern to match
-  let conditional_operators = '\<if\|unless\|while\|until\>'
+  let conditional_operators = '\v<if|unless|while|until>'
   " save the current line
   let current_line = line('.')
   " go to end of current line
@@ -12,7 +12,7 @@ function! ConvertPostConditional()
   let first_match = search(conditional_operators, 'bnW')
 
   " if the first match isn't on the current line, exit.
-  if current_line != first_match
+  if current_line != first_match && current_line != first_match + 1
     "echo "no match"
     return
   endif

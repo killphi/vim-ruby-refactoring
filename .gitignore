@@ -2,3 +2,4 @@
 *.swp
 doc/tags
 test/reports/*
+.vim-flavor

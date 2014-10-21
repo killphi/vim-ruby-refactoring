@@ -2,10 +2,9 @@
 "   Extracts the selected scope into a method above the scope of the
 "   current method
 function! ExtractMethod() range
-  echo "not implemented"
-  return
   try
     let name = ruby_refactoring#get_input("Method name: ", "No method name given!")
+    let name = tolower(substitute(name, ' ', '_', 'g'))
   catch
     echo v:exception
     return

@@ -10,29 +10,38 @@ Feature: Convert Post Conditional :RConvertPostConditional
     """
     do_something if condition
     """
-    When I go to the line and execute:
-    """
-    :RConvertPostConditional
-    """
-    Then I should see:
+    When I execute :RConvertPostConditional
+    Then I see:
     """
     if condition
       do_something
     end
     """
 
-  Scenario: Convert a simple if pre-conditional expression
+  Scenario: Convert a simple if pre-conditional expression from position if
     Given I have the following code:
     """
     if condition
       do_something
     end
     """
-    When I go to the line and execute:
+    When I go to the first line
+    And I execute :RConvertPostConditional
+    Then I see:
     """
-    :RConvertPostConditional
+    do_something if condition
     """
-    Then I should see:
+
+  Scenario: Convert a simple if pre-conditional expression from inline
+    Given I have the following code:
+    """
+    if condition
+      do_something
+    end
+    """
+    When I go to line 2
+    And I execute :RConvertPostConditional
+    Then I see:
     """
     do_something if condition
     """

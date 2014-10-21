@@ -11,14 +11,11 @@ Feature: Inline Temp :RInlineTemp
     foo = 10
     puts foo
     """
-    When I go to the line and execute:
-    """
-    :RInlineTemp
-    """
-    Then I should see:
+    When I go to the first line
+    And I execute :RInlineTemp
+    Then I see:
     """
     puts 10
-
     """
 
   Scenario: Inline a temporary variable to two variables on the same line
@@ -27,14 +24,11 @@ Feature: Inline Temp :RInlineTemp
     x = 5
     y = x and z = x
     """
-    When I go to the line and execute:
-    """
-    :RInlineTemp
-    """
-    Then I should see:
+    When I go to the first line
+    And I execute :RInlineTemp
+    Then I see:
     """
     y = 5 and z = 5
-
     """
 
   Scenario: Inline a temporary variable to all variables within the context of a method
@@ -51,11 +45,9 @@ Feature: Inline Temp :RInlineTemp
       y = x + 1
     end
     """
-    When I go to line "2" and execute:
-    """
-    :RInlineTemp
-    """
-    Then I should see:
+    When I go to line 2
+    And I execute :RInlineTemp
+    Then I see:
     """
     def some_method
       y = 5 and z = 5
@@ -66,7 +58,6 @@ Feature: Inline Temp :RInlineTemp
       x = 2
       y = x + 1
     end
-
     """
 
   Scenario: Inline a temporary variable to all variables within the context of a method
@@ -77,16 +68,13 @@ Feature: Inline Temp :RInlineTemp
     x = 10
     bar = x + 10
     """
-    When I go to the line and execute:
-    """
-    :RInlineTemp
-    """
-    Then I should see:
+    When I go to the first line
+    And I execute :RInlineTemp
+    Then I see:
     """
     foo = 5 + 10
     x = 10
     bar = x + 10
-
     """
 
   Scenario: Inline a temporary variable to all variables within the context of a method
@@ -97,16 +85,13 @@ Feature: Inline Temp :RInlineTemp
     a = 2
     c = a + 1
     """
-    When I go to line "3" and execute:
-    """
-    :RInlineTemp
-    """
-    Then I should see:
+    When I go to line 3
+    And I execute :RInlineTemp
+    Then I see:
     """
     a = 1
     b = a + 1
     c = 2 + 1
-
     """
 
   Scenario: Inline a temporary variable to a value within a string
@@ -115,11 +100,9 @@ Feature: Inline Temp :RInlineTemp
     then = 2006
     word  = "#{then}-01-01"
     """
-    When I go to the line and execute:
-    """
-    :RInlineTemp
-    """
-    Then I should see:
+    When I go to the first line
+    And I execute :RInlineTemp
+    Then I see:
     """
     word  = "2006-01-01"
     """
@@ -137,13 +120,10 @@ Feature: Inline Temp :RInlineTemp
         puts foo
       end
     end
-
     """
-    When I go to line "7" and execute:
-    """
-    :RInlineTemp
-    """
-    Then I should see:
+    When I go to line 7
+    And I execute :RInlineTemp
+    Then I see:
     """
     describe "foo" do
       def arbitrary
@@ -154,5 +134,4 @@ Feature: Inline Temp :RInlineTemp
         puts 10
       end
     end
-
     """

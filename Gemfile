@@ -4,12 +4,14 @@ group :test do
   gem 'rake'
 
   gem 'cucumber'
-  gem 'rspec'
+  gem 'rspec-expectations'
 
   gem 'robot-vim'
+  gem 'vim-flavor'
 end
 
 group :dev do
+  gem 'guard-shell'
   gem 'guard-cucumber'
   gem 'guard-livereload'
 end

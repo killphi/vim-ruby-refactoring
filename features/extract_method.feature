@@ -23,12 +23,10 @@
 #       end
 #     end
 #     """
-#     When I select "two + three" and execute:
-#     """
-#     :RExtractMethod
-#     """
-#     And I fill in the parameter "add"
-#     Then I should see:
+#     When I select expression `two + three`
+#     And I execute :RExtractMethod
+#     And I fill in `add`
+#     Then I see:
 #     """
 #     class Foo
 #       def method_one
@@ -48,7 +46,6 @@
 #         two + three
 #       end
 #     end
-#
 #     """
 #
 #   Scenario: Extract selected line to method with no parameter
@@ -62,14 +59,11 @@
 #       @commands = ':normal gg'
 #       @commands << return_key
 #     end
-#
 #     """
-#     When I select "@commands << return_key" and execute:
-#     """
-#     :RExtractMethod
-#     """
-#     And I fill in the parameter "add_return_key"
-#     Then I should see:
+#     When I select expression `@commands << return_key`
+#     And I execute :RExtractMethod
+#     And I fill in `add return key`
+#     Then I see:
 #     """
 #     def return_key
 #       "\n"
@@ -83,7 +77,6 @@
 #     def add_return_key
 #       @commands << return_key
 #     end
-#
 #     """
 #
 #   Scenario: Extract in an rspec file does not add lets as parameters
@@ -101,14 +94,11 @@
 #         expect(bowling.score).to eq(0)
 #       end
 #     end
-#
 #     """
-#     When I select the "20.times do" block and execute:
-#     """
-#     :RExtractMethod
-#     """
-#     And I fill in the parameter "roll_many"
-#     Then I should see:
+#     When I select block from expression `20.times do`
+#     And I execute :RExtractMethod
+#     And I fill in `roll many`
+#     Then I see:
 #     """
 #     require 'bowling'
 #
@@ -126,7 +116,6 @@
 #         end
 #       end
 #     end
-#
 #     """
 #
 #   Scenario: Parameters to extracted method should be in the order they are declared in original method when declared on separate lines.
@@ -137,14 +126,11 @@
 #       y = 2
 #       z = x + y
 #     end
-#
 #     """
-#     When I select "x + y" and execute:
-#     """
-#     :RExtractMethod
-#     """
-#     And I fill in the parameter "add"
-#     Then I should see:
+#     When I select expression `x + y`
+#     And I execute :RExtractMethod
+#     And I fill in `add`
+#     Then I see:
 #     """
 #     def originalMethod
 #       x = 1
@@ -155,7 +141,6 @@
 #     def add(x, y)
 #       x + y
 #     end
-#
 #     """
 #
 #   Scenario: Parameters to extracted method should be in the order they are declared in original method when declared on same lines.
@@ -164,14 +149,11 @@
 #     def originalMethod(b, a)
 #       c = a + b
 #     end
-#
 #     """
-#     When I select "a + b" and execute:
-#     """
-#     :RExtractMethod
-#     """
-#     And I fill in the parameter "add"
-#     Then I should see:
+#     When I select expression `a + b`
+#     And I execute :RExtractMethod
+#     And I fill in `add`
+#     Then I see:
 #     """
 #     def originalMethod(b, a)
 #       c = add(b, a)
@@ -180,5 +162,4 @@
 #     def add(b, a)
 #       a + b
 #     end
-#
 #     """

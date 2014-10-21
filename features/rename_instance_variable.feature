@@ -11,15 +11,12 @@ Feature: Renaming instance variable :RRenameInstanceVariable
       @instance_variable
     end
     """
-    When I select the instance variable and execute:
-    """
-    :RRenameInstanceVariable
-    """
-    And I fill in the parameter "foo"
-    Then I should see:
+    When I select expression `@instance_variable`
+    And I execute :RRenameInstanceVariable
+    And I fill in `foo bar`
+    Then I see:
     """
     def method
-      @foo
+      @foo_bar
     end
-
     """

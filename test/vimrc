@@ -1,7 +1,10 @@
+let s:flavors = glob('./.vim-flavor/deps/*')
+let s:rtps = filter(split(s:flavors, '\n'), 'isdirectory(v:val)')
+let s:rtp = split(&runtimepath, ',')
+let &runtimepath = join([] + s:rtp + s:rtps, ',')
+
 set rtp+=.
-set rtp+=test/matchit
-set rtp+=test/vim-ruby
-runtime! ruby-refactoring.vim
+runtime ruby-refactoring.vim
 
 set expandtab
 set sw=2

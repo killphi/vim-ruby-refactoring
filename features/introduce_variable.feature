@@ -10,11 +10,8 @@ Feature: Introduce variable :RIntroduceVariable
     """
     HelloWorld.new
     """
-    When I select the class and execute:
-    """
-    :RIntroduceVariable
-    """
-    Then I should see:
+    When I execute :RIntroduceVariable
+    Then I see:
     """
     hello_world = HelloWorld.new
     """
@@ -24,11 +21,8 @@ Feature: Introduce variable :RIntroduceVariable
     """
     hello_world.person
     """
-    When I select the class and execute:
-    """
-    :RIntroduceVariable
-    """
-    Then I should see:
+    When I execute :RIntroduceVariable
+    Then I see:
     """
     person = hello_world.person
     """
@@ -38,11 +32,8 @@ Feature: Introduce variable :RIntroduceVariable
     """
     hello_world.person("Foo", "Bar")
     """
-    When I select the class and execute:
-    """
-    :RIntroduceVariable
-    """
-    Then I should see:
+    When I execute :RIntroduceVariable
+    Then I see:
     """
     person = hello_world.person("Foo", "Bar")
     """
@@ -52,11 +43,8 @@ Feature: Introduce variable :RIntroduceVariable
     """
     hello_world.person("Foo", Bar.new)
     """
-    When I select the class and execute:
-    """
-    :RIntroduceVariable
-    """
-    Then I should see:
+    When I execute :RIntroduceVariable
+    Then I see:
     """
     person = hello_world.person("Foo", Bar.new)
     """
@@ -66,11 +54,8 @@ Feature: Introduce variable :RIntroduceVariable
     """
     hello_world.person {:foo => "bar}
     """
-    When I select the class and execute:
-    """
-    :RIntroduceVariable
-    """
-    Then I should see:
+    When I execute :RIntroduceVariable
+    Then I see:
     """
     person = hello_world.person {:foo => "bar}
     """
@@ -80,11 +65,8 @@ Feature: Introduce variable :RIntroduceVariable
     """
     hello_world.person.name("Foo", Bar.new)
     """
-    When I select the class and execute:
-    """
-    :RIntroduceVariable
-    """
-    Then I should see:
+    When I execute :RIntroduceVariable
+    Then I see:
     """
     name = hello_world.person.name("Foo", Bar.new)
     """

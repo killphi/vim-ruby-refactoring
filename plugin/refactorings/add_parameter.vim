@@ -18,15 +18,18 @@ function! AddParameter()
   endif
 
   " remove trailing whitespace
-  s/\v\s$//e
+  s/\v\s+$//e
 
   " brackets
-  if g:ruby_refactoring_brackets_have_space == 1
+  if g:ruby_refactoring_parentheses_style == 2
     let bracket_open  = "( "
     let bracket_close = " )"
-  else
+  elseif g:ruby_refactoring_parentheses_style == 1
     let bracket_open  = "("
     let bracket_close = ")"
+  elseif g:ruby_refactoring_parentheses_style == 0
+    let bracket_open  = " "
+    let bracket_close = ""
   endif
 
   " test the line
@@ -35,7 +38,6 @@ function! AddParameter()
   let has_only_brackets              = match(line, "\\vdef \\S+\\s*\\(\\s*\\)")
   let has_parameter_without_brackets = match(line, "\\vdef \\S+\\s+\\S+")
   let has_parameter_with_brackets    = match(line, "\\vdef \\S+\\(\\s*(\\S+\\s*)+\\)")
-  let brackets_have_space            = match(line, "\\vdef \\S+\\((\\s+\\S+|\\S+\\s+)\\)")
 
   let l:command = "s/\\vdef \\S+\\zs"
 
@@ -43,9 +45,9 @@ function! AddParameter()
   if has_only_brackets != -1
     exec l:command . "\\s*\\(\\s*\\)/" . bracket_open . name . bracket_close . "/"
   elseif has_parameter_with_brackets != -1
-    exec l:command . "\\s*\\(\\s*(\\S+\\s*)+\\)/" . bracket_open . "\\1, " . name . bracket_close . "/"
+    exec l:command . "\\s*\\((\\s*(\\S+\\s*)+)\\)/" . bracket_open . "\\1, " . name . bracket_close . "/"
   elseif has_parameter_without_brackets != -1
-    exec l:command . "\\s+(\\S+\\s*)+/" . bracket_open . "\\1, " . name . bracket_close . "/"
+    exec l:command . "\\s+((\\S+\\s*)+)/" . bracket_open . "\\1, " . name . bracket_close . "/"
   else
     exec "normal A" . bracket_open . name . bracket_close . "\<Esc>"
   endif

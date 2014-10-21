@@ -5,28 +5,34 @@ Feature: Extract Constant :RExtractConstant
       :RExtractConstant
       <leader>rec
 
-  Scenario: Extract a constant
-    Given I have the following code:
-    """
-    class Foo
-      def bar
-        "some magic number"
-      end
-    end
+  Scenario: Extract a constant when there is no constant
+    Given I have the test file extract_constant
+    When I select expression `"some magic number"`
+    And I execute :RExtractConstant
+    And I fill in `magic string`
+    Then the result equals the file extract_constant
 
-    """
-    When I select "some magic number" and execute:
-    """
-    :RExtractConstant
-    """
-    And I fill in the parameter "magic_string"
-    Then I should see:
-    """
-    class Foo
-      MAGIC_STRING = "some magic number"
-      def bar
-        MAGIC_STRING
-      end
-    end
+  Scenario: Extract a constant when there is a newline after it
+    Given I have the test file extract_constant
+    And I go to the first line
+    And I execute :put = ''
+    When I select expression `"some magic number"`
+    And I execute :RExtractConstant
+    And I fill in `magic string`
+    Then the result equals the file extract_constant
 
-    """
+  Scenario: Extract a constant when there already is at least one constant
+    Given I have the test file extract_constant
+    And I go to the first line
+    And I execute :put = ['  MAGIC_CONSTANT = \"blah\"', '']
+    When I select expression `"some magic number"`
+    And I execute :RExtractConstant
+    And I fill in `magic string`
+    Then the result equals the file extract_constant_with_constant
+
+  Scenario: Extract a constant when there are multiple occurences
+    Given I have the test file extract_constant_multiple
+    When I select expression `"some magic number"`
+    And I execute :RExtractConstant
+    And I fill in `magic string`
+    Then the result equals the file extract_constant_multiple
