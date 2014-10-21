@@ -1,6 +1,0 @@
-[submodule "test/vim-ruby"]
-	path = test/vim-ruby
-	url = https://github.com/vim-ruby/vim-ruby
-[submodule "test/matchit"]
-	path = test/matchit
-	url = https://github.com/vim-scripts/matchit.zip
