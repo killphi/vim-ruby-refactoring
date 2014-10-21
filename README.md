@@ -1,6 +1,6 @@
 # Ruby Refactoring Tool for Vim
 
-[![Build Status](https://travis-ci.org/killphi/vim-ruby-refactoring.svg?branch=changes)
+[![Build Status](https://travis-ci.org/killphi/vim-ruby-refactoring.svg?branch=master)
 ](https://travis-ci.org/killphi/vim-ruby-refactoring)  
 Currently in 100% VimL, but might move toward a Ruby implementation sometime.
 
