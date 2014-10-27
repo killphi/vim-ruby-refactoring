@@ -1,3 +1,0 @@
-Before do
-  @commands = ''
-end

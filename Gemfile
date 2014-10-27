@@ -14,6 +14,7 @@ group :dev do
   gem 'guard-shell'
   gem 'guard-cucumber'
   gem 'guard-livereload'
+  gem 'simplecov'
 end
 
 group :doc do

@@ -1,13 +1,13 @@
 When /^I execute:$/ do |command|
-  add_to_commands command
+  @commands << command
 end
 
 When /^I execute (.+)$/ do |command|
-  add_to_commands command
+  @commands << command
 end
 
 When /^I fill in `([^`]*)`$/ do |parameter|
-  add_to_commands parameter
+  @commands << parameter
 end
 
 When /^I redirect output to register (\S+)$/ do |register|

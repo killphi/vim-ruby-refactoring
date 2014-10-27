@@ -3,7 +3,7 @@ When /^I select \"@commands << return_key\"$/ do
 end
 
 def select_line
-  add_to_commands ":normal 7Gvg_"
+  @commands << ":normal 7Gvg_"
 end
 
 When /^I select \"two \+ three\"$/ do
@@ -11,17 +11,17 @@ When /^I select \"two \+ three\"$/ do
 end
 
 def select_lines
-  add_to_commands ":normal 11G2wv$"
+  @commands << ":normal 11G2wv$"
 end
 
 When /^I select the \"20\.times do\" block$/ do
-  add_to_commands ":normal 7G^v2j$"
+  @commands << ":normal 7G^v2j$"
 end
 
 When /^I select \"x \+ y\"$/ do
-  add_to_commands ":normal 4Gfxv$"
+  @commands << ":normal 4Gfxv$"
 end
 
 When /^I select \"a \+ \S+\"$/ do
-  add_to_commands ":normal 2Gfav$"
+  @commands << ":normal 2Gfav$"
 end

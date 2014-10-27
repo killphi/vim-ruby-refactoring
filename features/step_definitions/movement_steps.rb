@@ -16,15 +16,15 @@ end
 
 When /^I select expression `([^`]*)`$/ do |expr|
   go_to_expression expr
-  add_to_commands ":normal v#{expr.length - 1}l"
+  @commands << ":normal v#{expr.length - 1}l"
 end
 
 When /^I block select expression `([^`]*)` plus (\d+) lines$/ do |expr, lines|
   go_to_expression expr
-  add_to_commands ":normal V#{lines}j"
+  @commands << ":normal V#{lines}j"
 end
 
 When /^I select block from expression `([^`]*)`$/ do |expr|
   go_to_expression expr
-  add_to_commands ":normal V%"
+  @commands << ":normal V%"
 end

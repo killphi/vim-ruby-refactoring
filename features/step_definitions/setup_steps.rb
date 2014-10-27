@@ -7,6 +7,9 @@ Given /^I have the test file (\S+)$/ do |file|
   @input.strip!
 end
 
+Given /^I have a test file$/ do |file|
+end
+
 Given /^the variable (\S+) is set to (.+)$/ do |variable, value|
-  add_to_commands ":let #{variable} = #{value}"
+  @commands << ":let #{variable} = #{value}"
 end

@@ -1,25 +1,40 @@
-task :default => :ci
+task :ci => ['vim:test', 'vim:plugins', 'features:html']
 
-task :ci => [:vim_flavor, :check_stuff, :features]
+namespace :vim do
+  desc 'outputs vim version, installs VimFlavors for testing and runs vspec tests'
+  task :test do
+    sh 'vim --version'
+    sh 'vim-flavor test'
+  end
 
-desc 'outputs vim version, installs VimFlavors for testing and runs vspec tests'
-task :vim_flavor do
-  sh 'vim --version'
-  sh 'vim-flavor test'
+  desc 'checks for directories and stuff'
+  task :plugins do
+    sh 'ls -F .vim-flavor/deps'
+  end
 end
 
-desc 'checks for directories and stuff'
-task :check_stuff do
-  sh 'ls .vim-flavor'
-  sh 'ls .vim-flavor/deps'
-end
+begin
+  require 'cucumber/rake/task'
 
-desc 'run cucumber features'
-task :features do
-  sh 'cucumber'
-end
+  Cucumber::Rake::Task.new(:features)
 
-desc 'format cucumber run as HTML'
-task :html_features do
-  sh 'cucumber --profile html'
+  namespace :features do
+    Cucumber::Rake::Task.new(:html) do |t|
+      t.profile = 'html'
+    end
+  end
+
+  task default: 'features:html'
+rescue LoadError
+  desc 'Cucumber not available'
+  task :features do
+    abort 'Cucumber is not available, please install it'
+  end
+
+  namespace :features do
+    desc 'Cucumber not available'
+    task :html do
+      abort 'Cucumber is not available, please install it'
+    end
+  end
 end
